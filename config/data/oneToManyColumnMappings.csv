@@ -1,0 +1,13 @@
+Record,Table,Column,Column_Type,Type,Value,Mapped_Column,Mapped_Condition,Mapped_Condition_Type,Mapped_If_Type,Mapped_If,Mapped_Else_Type,Mapped_Else,Mapped_Concat,Mapped_Lookup_Column,Mapped_Lookup_Table,Mapped_Lookup_Fallback,,Id_Table,Id_Column,Id_Lookup,Id_Primary_Key_1_Column,Id_Primary_Key_1_Datatype,Id_Primary_Key_1_Value,Id_Primary_Key_2_Column,Id_Primary_Key_2_Datatype,Id_Primary_Key_2_Value,Id_Primary_Key_3_Column,Id_Primary_Key_3_Datatype,Id_Primary_Key_3_Value
+1,grid,Y,,VALUE,12,,,,,,,,,,,,,,,,,,,,,,,,
+1,grid,RWT,,COLUMN,,Pipe Wall Thickness Thickness 1,,,,,,,,,,,,,,,,,,,,,,,
+1,grid,Y_REF,,VALUE,12 oclock,,,,,,,,,,,,,,,,,,,,,,,,
+2,grid,Y,,VALUE,3,,,,,,,,,,,,,,,,,,,,,,,,
+2,grid,RWT,,COLUMN,,Pipe Wall Thickness Thickness 2,,,,,,,,,,,,,,,,,,,,,,,
+2,grid,Y_REF,,VALUE,3 oclock,,,,,,,,,,,,,,,,,,,,,,,,
+3,grid,Y,,VALUE,6,,,,,,,,,,,,,,,,,,,,,,,,
+3,grid,RWT,,COLUMN,,Pipe Wall Thickness Thickness 3,,,,,,,,,,,,,,,,,,,,,,,
+3,grid,Y_REF,,VALUE,6 oclock,,,,,,,,,,,,,,,,,,,,,,,,
+4,grid,Y,,VALUE,9,,,,,,,,,,,,,,,,,,,,,,,,
+4,grid,RWT,,COLUMN,,Pipe Wall Thickness Thickness 4,,,,,,,,,,,,,,,,,,,,,,,
+4,grid,Y_REF,,VALUE,9 oclock,,,,,,,,,,,,,,,,,,,,,,,,
