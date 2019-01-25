@@ -280,7 +280,7 @@ function handleIfElse (columnMapping, columnValue, row) {
       mElseType = columnMapping.Mapped_Else_Type;
 
   if (mConditionType === 'EQUAL') {
-    if (columnValue === mCondition) {
+    if (columnValue == mCondition) {
       return handleIfElseType(mIfType, mIf, row);
     } else {
       return handleIfElseType(mElseType, mElse, row);
@@ -292,7 +292,7 @@ function handleIfElse (columnMapping, columnValue, row) {
       return handleIfElseType(mElseType, mElse, row);
     }
   }
-  
+
 }
 
 

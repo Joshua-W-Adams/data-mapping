@@ -161,7 +161,7 @@ function filterArray (data, filters) {
           column = filters[i].column;
           value = filters[i].value;
           // confirm current row matches filter requirements
-          check = row[column] === value;
+          check = row[column] == value;
           // condition not met, therefore exit loop
           if (check === false) {
             break;
@@ -240,25 +240,25 @@ function includeRow (row, tableFilters) {
 
       // Handle all filter conditions
       if (filterType === 'EQUAL') {
-          if (filterValue === columnValue) {
+          if (filterValue == columnValue) {
               includeRow = true;
           } else {
               includeRow = false;
           }
       } else if (filterType === 'NOT_EQUAL') {
-        if (filterValue !== columnValue) {
+        if (filterValue != columnValue) {
           includeRow = true;
         } else {
           includeRow = false;
         }
       } else if (filterType === 'NULL') {
-        if (!columnValue || columnValue.trim() === '') {
+        if (!columnValue || columnValue.trim() == '') {
           includeRow = true;
         } else {
           includeRow = false;
         }
       } else if (filterType === 'NOT_NULL') {
-        if (columnValue && columnValue.trim() !== '') {
+        if (columnValue && columnValue.trim() != '') {
           includeRow = true;
         } else {
           includeRow = false;
