@@ -39,19 +39,11 @@
       "name": "cml",
       "filePath": "..\\config\\data\\cml.json"
     }],
-  "test": [
-    {
-      "name": "copy",
-      "filePath": "..\\config\\test\\copy-data.sql"
+  "test": {
+    "copyFilePath": "..\\config\\test\\copy-data.sql",
+    "loadFilePath": "..\\config\\test\\load-data.sql",
+    "cloneFilePath": "..\\config\\test\\schema-integrity.sql"
     },
-    {
-      "name": "load",
-      "filePath": "..\\config\\test\\load-data.sql"
-    },
-    {
-      "name": "clone",
-      "filePath": "..\\config\\test\\schema-integrity.sql"
-    }],
   "output": {
     "dataFilepath": "..\\output\\data\\",
     "debugFilepath": "..\\output\\debug\\"
