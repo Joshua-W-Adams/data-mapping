@@ -154,7 +154,7 @@ function writeDataToFiles (configData, outputData) {
     if (outputData.hasOwnProperty(key)) {
 
       table = key,
-      filePath = configData.output.dataFilePath + table + '.csv';
+      filePath = configData.output.dataFilepath + table + '.csv';
 
       // delete any existing files
       if (fs.existsSync(filePath)) {

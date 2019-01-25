@@ -101,7 +101,7 @@ function mapData (configData) {
             filters = lib.getOneToFewFilters(mappingConfigurations[table].primaryKeyList
               , outputRow);
             // determine if primary key already exists in output data array
-            var outputDataCheck = mapSingle.filterArray(outputData[table], filters);
+            var outputDataCheck = lib.filterArray(outputData[table], filters);
             // case 1 - data already exists in output data
             if (outputDataCheck.length > 0) {
               // confirm if dulicate requires manual review or can be ignored
@@ -109,7 +109,7 @@ function mapData (configData) {
               lib.handleDuplicates(outputRow, outputDataCheck, outputData[table + '_duplicates'], outputData[table + '_duplicates_resolved']);
             } else {
               // check for data existing in database already
-              dbDataCheck = mapSingle.filterArray(configData[table], filters);
+              dbDataCheck = lib.filterArray(configData[table], filters);
               // case 2 - output row found in database data
               if (dbDataCheck.length > 0) {
                 // confirm if dulicate requires manual review or can be ignored

@@ -29,7 +29,7 @@ function mapOneInputRowToOneOutputRow (outputData, table, row, columnMappings
 
     // Update with specifics for multiple rows
     if (appendOneToManyMappings === true) {
-      cValue = appendSpecificsForRow(cValue, colName, row, oneToManyMapping, configData, outputData, table);
+      cValue = appendSpecificsForRow(cValue, colName, row, oneToManyMappings, configData, outputData, table);
     }
 
     // store mapped data in array

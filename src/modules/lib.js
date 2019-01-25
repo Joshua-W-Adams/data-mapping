@@ -122,7 +122,7 @@ function getOneToFewFilters (primaryKeyList, outputRow) {
   for (var x = 0; x < primaryKeyList.length; x++) {
     pkCol = primaryKeyList[x].Column;
     pkValue = outputRow[pkCol];
-    filters = mapSingle.addFilter(filters, pkCol, pkValue);
+    filters = addFilter(filters, pkCol, pkValue);
   }
 
   return filters;
