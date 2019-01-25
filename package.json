@@ -1,0 +1,24 @@
+{
+  "name": "data-mapping",
+  "version": "1.0.0",
+  "description": "generic program to map one data format to another",
+  "main": "src\\main.js",
+  "scripts": {
+    "test": "test\\test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joshua-W-Adams/data-mapping.git"
+  },
+  "author": "Joshua Adams",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Joshua-W-Adams/data-mapping/issues"
+  },
+  "homepage": "https://github.com/Joshua-W-Adams/data-mapping#readme",
+  "dependencies": {
+    "csv-parse": "^4.3.0",
+    "json2csv": "^4.3.3",
+    "mysql": "^2.16.0"
+  }
+}
