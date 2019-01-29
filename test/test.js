@@ -27,7 +27,7 @@ function readFile (filePath) {
 
 function outputLogFile (loadQueryRes, filePath) {
 	return new Promise (function (resolve, reject) {
-		fs.writeFile(filePath + 'log.txt', JSON.stringify(res, null, '\t'), function (err) {
+		fs.writeFile(filePath + 'log.txt', JSON.stringify(loadQueryRes, null, '\t'), function (err) {
 			if (err) {
 				reject(err);
 			} else {
