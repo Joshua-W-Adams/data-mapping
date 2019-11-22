@@ -10,7 +10,19 @@
 var fs = require('fs');
 
 // import modules
-var dbConnection = require('./modules/db-ops.js');
+const cli = require('./modules/cli.js');
+
+////////////////////////// Define task code ////////////////////////////////////
+
+function executeSqlFile (sqlFile) {
+  return new Promise(function (resolve, reject) {
+    cli.mySqlCli(sqlFile).then(function (res) {
+      resolve(res);
+    }).catch(function (err) {
+      reject(err);
+    })
+  })
+}
 
 function readFile (filePath) {
 	return new Promise (function (resolve, reject) {
@@ -43,30 +55,24 @@ function conductTest () {
 	var config = JSON.parse(fs.readFileSync('..\\config\\config.json', 'utf8'));
 
 	// create clone of database
-	readFile(config.test.cloneFilePath).then(function (cloneQuery) {
-		return dbConnection.executeSql(cloneQuery, 'root');
-	// copy data to clone
+	executeSqlFile(__dirname + "\\" + config.test.cloneFilePath)
+  .then(function () {
+    // copy data to clone
+		return executeSqlFile(__dirname + "\\" + config.test.copyFilePath);
 	}).then(function () {
-		return readFile(config.test.copyFilePath);
-	}).then(function (copyQuery) {
-		return dbConnection.executeSql(copyQuery, 'root');
+		return executeSqlFile(__dirname + "\\" + config.test.loadFilePath);
 	// load output data to cloned database
-	}).then(function () {
-		return readFile(config.test.loadFilePath);
-	}).then(function (loadQuery) {
-		return dbConnection.executeSql(loadQuery, 'root');
   }).then(function (loadQueryRes) {
 		return outputLogFile(loadQueryRes, config.output.debugFilepath);
 	}).then(function () {
-		// Close the database connection and end the code
-		dbConnection.connections['root'].end();
-		dbConnection = null;
 		console.log('Data load completed. See log file for details.');
 	}).catch(function (err) {
 		console.log('error detected during test procedure.')
 		console.log(err);
 	})
 
+  return;
+  
 }
 
 /*
