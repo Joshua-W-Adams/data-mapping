@@ -1,0 +1,9 @@
+Table,Column,Column_Type,Type,Value,Mapped_Column,Mapped_Condition,Mapped_Condition_Type,Mapped_If_Type,Mapped_If,Mapped_Else_Type,Mapped_Else,Mapped_Concat,Mapped_Lookup_Column,Mapped_Lookup_Table,Mapped_Lookup_Fallback,Id_Table,Id_Column,Id_Lookup,Id_Primary_Key_1_Column,Id_Primary_Key_1_Value,Id_Primary_Key_2_Column,Id_Primary_Key_2_Value,Id_Primary_Key_3_Column,Id_Primary_Key_3_Value
+technical_protocol_bullet_point_mapped,BULLET_POINT_ID,,VALUE,,\N,,,,,,,,,,,,,,,,,,,
+technical_protocol_bullet_point_mapped,TECHNICAL_PROTOCOL_ID,,COLUMN,,Technical Protocol Code,,,,,,,,,,,,,,,,,,,
+technical_protocol_bullet_point_mapped,NAME,,VALUE,,\N,,,,,,,,,,,,,,,,,,,
+technical_protocol_bullet_point_mapped,FOOTNOTE_NUMBER,,VALUE,,\N,,,,,,,,,,,,,,,,,,,
+technical_protocol_bullet_point_mapped,FOOTNOTE,,VALUE,,\N,,,,,,,,,,,,,,,,,,,
+technical_protocol_bullet_point_mapped,SUB_BULLET_POINTS,,VALUE,,\N,,,,,,,,,,,,,,,,,,,
+technical_protocol_bullet_point_mapped,SUB_BULLET_POINTS_FOOTNOTE_NUMBER,,VALUE,,\N,,,,,,,,,,,,,,,,,,,
+technical_protocol_bullet_point_mapped,SUB_BULLET_POINTS_FOOTNOTE,,VALUE,,\N,,,,,,,,,,,,,,,,,,,

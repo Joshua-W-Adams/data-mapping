@@ -1,1 +1,2 @@
 Table,Filter_Type,Filter_Column,Filter_Value
+grid,EQUAL,Scan Type (Area / Radial / Point),Radial
