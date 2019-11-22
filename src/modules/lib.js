@@ -45,6 +45,19 @@ function getTableMappingConfigurations (configData) {
     return i.Table===table && i.Column_Type==='PK';
   }
 
+  function getPrimaryKeys () {
+
+    var pk1 = configData.oneToOneColumnMappings.filter(pkFilterCallback),
+        pk2 = configData.oneToFewColumnMappings.filter(pkFilterCallback);
+
+    if (pk1.length > 0) {
+      return pk1;
+    } else {
+      return pk2;
+    }
+
+  }
+
   // loop thrugh all tables and create mappings
   for (var t = 0; t < tList.length; t++) {
 
@@ -56,7 +69,7 @@ function getTableMappingConfigurations (configData) {
     oneToManyArr = configData.oneToManyColumnMappings.filter(filterCallback);
     oneToFewArr = configData.oneToFewColumnMappings.filter(filterCallback);
     tableFiltersArr = configData.tableFilters.filter(filterCallback);
-    pkArr = configData.oneToFewColumnMappings.filter(pkFilterCallback);
+    pkArr = getPrimaryKeys();
 
     // determine amount of times input record should be duplicated in one to
     // many mappings
@@ -178,6 +191,17 @@ function filterArray (data, filters) {
 
 }
 
+function combineJsonObjects (outputRow, duplicateRow) {
+
+  for (var key in duplicateRow) {
+    if (duplicateRow.hasOwnProperty(key)) {
+      outputRow["db_" + key] = duplicateRow[key];
+    }
+  }
+
+  return;
+}
+
 function handleDuplicates (outputRow, compareArr, duplicateUnresolved, duplicatesResolved) {
 
   var filters = [],
@@ -207,6 +231,7 @@ function handleDuplicates (outputRow, compareArr, duplicateUnresolved, duplicate
     duplicatesResolved.push(outputRow);
   } else {
     // not found - add value to duplicates list for manual assessment
+    combineJsonObjects(outputRow, compareArr[0]);
     duplicateUnresolved.push(outputRow);
   }
 

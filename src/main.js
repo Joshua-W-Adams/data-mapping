@@ -85,7 +85,7 @@ function mapData (configData) {
                 , row, mappingConfigurations[table].oneToOneMappingList, true
                 , oneToManySpecificArr, configData);
               // push row to storing array
-              outputData[table].push(outputRow);
+              outputRowToTable(table, outputRow, outputData, configData, mappingConfigurations);
             }
 
           // one to few mapping case detected
@@ -95,32 +95,8 @@ function mapData (configData) {
             outputRow = mapSingle.mapOneInputRowToOneOutputRow(outputData, table
               , row, mappingConfigurations[table].oneToFewMappingList, false
               , null, configData);
-            // commence check for output row already existing in output data
-            // or master database
-            // generate filter list for two duplicate check locations
-            filters = lib.getOneToFewFilters(mappingConfigurations[table].primaryKeyList
-              , outputRow);
-            // determine if primary key already exists in output data array
-            var outputDataCheck = lib.filterArray(outputData[table], filters);
-            // case 1 - data already exists in output data
-            if (outputDataCheck.length > 0) {
-              // confirm if dulicate requires manual review or can be ignored
-              // and push to appropriate array
-              lib.handleDuplicates(outputRow, outputDataCheck, outputData[table + '_duplicates'], outputData[table + '_duplicates_resolved']);
-            } else {
-              // check for data existing in database already
-              dbDataCheck = lib.filterArray(configData[table], filters);
-              // case 2 - output row found in database data
-              if (dbDataCheck.length > 0) {
-                // confirm if dulicate requires manual review or can be ignored
-                // and push to appropriate array
-                lib.handleDuplicates(outputRow, dbDataCheck, outputData[table + '_duplicates'], outputData[table + '_duplicates_resolved']);
-              // case 3 - data not found in output data or database
-              } else {
-                // push output row to array
-                outputData[table].push(outputRow);
-              }
-            }
+            // push row to storing array
+            outputRowToTable(table, outputRow, outputData, configData, mappingConfigurations);
 
           // one to single mapping detected
           } else {
@@ -130,7 +106,7 @@ function mapData (configData) {
               , row, mappingConfigurations[table].oneToOneMappingList, false
               , null, configData);
             // push row to array
-            outputData[table].push(outputRow);
+            outputRowToTable(table, outputRow, outputData, configData, mappingConfigurations);
 
           }
 
@@ -151,6 +127,45 @@ function mapData (configData) {
       throw err.message;
     })
 
+}
+
+/**
+ * outputRow - output a row of generated data. Data will be output to one of 3
+ * files per table based on 3 conditions.
+ * 1 - data already exsits in table file,
+ * 2 - data already exists in database table,
+ * 3 - otherwise.
+ *
+ * @return {type}  description
+ */
+function outputRowToTable (table, outputRow, outputData, configData, mappingConfigurations) {
+  // commence check for output row already existing in output data
+  // or master database
+  // generate filter list for two duplicate check locations
+  filters = lib.getOneToFewFilters(mappingConfigurations[table].primaryKeyList
+    , outputRow);
+  // determine if primary key already exists in output data array
+  var outputDataCheck = lib.filterArray(outputData[table], filters);
+  // case 1 - data already exists in output data
+  if (outputDataCheck.length > 0) {
+    // confirm if dulicate requires manual review or can be ignored
+    // and push to appropriate array
+    lib.handleDuplicates(outputRow, outputDataCheck, outputData[table + '_duplicates'], outputData[table + '_duplicates_resolved']);
+  } else {
+    // check for data existing in database already
+    dbDataCheck = lib.filterArray(configData[table], filters);
+    // case 2 - output row found in database data
+    if (dbDataCheck.length > 0) {
+      // confirm if dulicate requires manual review or can be ignored
+      // and push to appropriate array
+      lib.handleDuplicates(outputRow, dbDataCheck, outputData[table + '_duplicates'], outputData[table + '_duplicates_resolved']);
+    // case 3 - data not found in output data or database
+    } else {
+      // push output row to array
+      outputData[table].push(outputRow);
+    }
+  }
+  return;
 }
 
 
