@@ -1,6 +1,6 @@
 USE INTEGRITY_TEST;
 
-LOAD DATA LOCAL INFILE "C:/repos/data-mapping/output/data/LOOPS.CSV"
+LOAD DATA LOCAL INFILE "C:/repos/data-mapping/output/montara_fpso_2011_baseline/map/LOOPS.CSV"
 INTO TABLE LOOPS
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -9,7 +9,7 @@ IGNORE 1 LINES;
 
 SHOW WARNINGS;
 
-LOAD DATA LOCAL INFILE "C:/repos/data-mapping/output/data/EQUIPMENT.CSV"
+LOAD DATA LOCAL INFILE "C:/repos/data-mapping/output/montara_fpso_2011_baseline/map/EQUIPMENT.CSV"
 INTO TABLE EQUIPMENT
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -18,7 +18,7 @@ IGNORE 1 LINES;
 
 SHOW WARNINGS;
 
-LOAD DATA LOCAL INFILE "C:/repos/data-mapping/output/data/DAMAGE_MECHANISM.CSV"
+LOAD DATA LOCAL INFILE "C:/repos/data-mapping/output/montara_fpso_2011_baseline/map/DAMAGE_MECHANISM.CSV"
 INTO TABLE DAMAGE_MECHANISM
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -27,7 +27,7 @@ IGNORE 1 LINES;
 
 SHOW WARNINGS;
 
-LOAD DATA LOCAL INFILE "C:/repos/data-mapping/output/data/STRATEGY.CSV"
+LOAD DATA LOCAL INFILE "C:/repos/data-mapping/output/montara_fpso_2011_baseline/map/STRATEGY.CSV"
 INTO TABLE STRATEGY
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -36,7 +36,7 @@ IGNORE 1 LINES;
 
 SHOW WARNINGS;
 
-LOAD DATA LOCAL INFILE "C:/repos/data-mapping/output/data/CML.CSV"
+LOAD DATA LOCAL INFILE "C:/repos/data-mapping/output/montara_fpso_2011_baseline/map/CML.CSV"
 INTO TABLE CML
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -45,7 +45,7 @@ IGNORE 1 LINES;
 
 SHOW WARNINGS;
 
-LOAD DATA LOCAL INFILE "C:/repos/data-mapping/output/data/INSPECTION.CSV"
+LOAD DATA LOCAL INFILE "C:/repos/data-mapping/output/montara_fpso_2011_baseline/map/INSPECTION.CSV"
 INTO TABLE INSPECTION
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -54,7 +54,7 @@ IGNORE 1 LINES;
 
 SHOW WARNINGS;
 
-LOAD DATA LOCAL INFILE "C:/repos/data-mapping/output/data/GRID.CSV"
+LOAD DATA LOCAL INFILE "C:/repos/data-mapping/output/montara_fpso_2011_baseline/map/GRID.CSV"
 INTO TABLE GRID
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'

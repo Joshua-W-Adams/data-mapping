@@ -51,8 +51,8 @@
     "cloneFilePath": "..\\config\\montara_fpso_2011_baseline\\test\\schema-integrity.sql"
     },
   "output": {
-    "dataFilepath": "..\\output\\data\\",
-    "debugFilepath": "..\\output\\debug\\"
+    "dataFilepath": "..\\output\\montara_fpso_2011_baseline\\map\\",
+    "debugFilepath": "..\\output\\montara_fpso_2011_baseline\\test\\"
   },
   "dbConnection": {
     "executablePath": "C:\\solidintegrity\\bin\\mysql-5.7.19-winx64\\bin\\",
