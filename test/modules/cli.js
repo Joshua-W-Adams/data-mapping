@@ -9,9 +9,6 @@
 const { exec } = require('child_process');
 const fs = require('fs');
 
-////////////////////////// Get User Inputs /////////////////////////////////////
-const config = JSON.parse(fs.readFileSync('..\\config\\config.json', 'utf8'));
-
 ////////////////////////// Define Functions ////////////////////////////////////
 
 function cliCommand (dir, command) {
@@ -36,7 +33,8 @@ function cliCommand (dir, command) {
   })
 }
 
-function mySqlCli (sql_file) {
+function mySqlCli (projectFolderName, sql_file) {
+  const config = JSON.parse(fs.readFileSync('..\\config\\' + projectFolderName + '\\config.json', 'utf8'));
   var dir = config.dbConnection.executablePath,
       cnfdir = "" + config.dbConnection.cnfPath + "";
       command = 'mysql --defaults-extra-file=' + cnfdir + 'config.cnf -vvv < "' + sql_file + '"'

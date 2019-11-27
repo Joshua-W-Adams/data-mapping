@@ -12,11 +12,27 @@ var fs = require('fs');
 // import modules
 const cli = require('./modules/cli.js');
 
+// define global objects
+var projectFolderName;
+
+// process.argv is an array containing the command line arguments. The first
+// element will be 'node', the second element will be the name of the project
+// mapping folder. The next elements will be any additional command line arguments.
+// not async function
+process.argv.forEach(function (val, index, array) {
+
+  // get project to map
+  if (index === 2) {
+    projectFolderName = val;
+  }
+
+});
+
 ////////////////////////// Define task code ////////////////////////////////////
 
 function executeSqlFile (sqlFile) {
   return new Promise(function (resolve, reject) {
-    cli.mySqlCli(sqlFile).then(function (res) {
+    cli.mySqlCli(projectFolderName, sqlFile).then(function (res) {
       resolve(res);
     }).catch(function (err) {
       reject(err);
@@ -52,7 +68,7 @@ function outputLogFile (loadQueryRes, filePath) {
 function conductTest () {
 
 	// read in mapping configuration object
-	var config = JSON.parse(fs.readFileSync('..\\config\\config.json', 'utf8'));
+	var config = JSON.parse(fs.readFileSync('..\\config\\' + projectFolderName + '\\config.json', 'utf8'));
 
 	// create clone of database
 	executeSqlFile(__dirname + "\\" + config.test.cloneFilePath)
@@ -72,7 +88,7 @@ function conductTest () {
 	})
 
   return;
-  
+
 }
 
 /*

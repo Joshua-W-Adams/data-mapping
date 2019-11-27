@@ -18,6 +18,22 @@ var lib = require('./modules/lib.js')
 // module to map one row of input data to one row of output data
 var mapSingle = require('./modules/map-single-row.js')
 
+// define global objects
+var projectFolderName;
+
+// process.argv is an array containing the command line arguments. The first
+// element will be 'node', the second element will be the name of the project
+// mapping folder. The next elements will be any additional command line arguments.
+// not async function
+process.argv.forEach(function (val, index, array) {
+
+  // get project to map
+  if (index === 2) {
+    projectFolderName = val;
+  }
+
+});
+
 // main method with high levele logic for mapping all data to a new format
 function mapData (configData) {
 
@@ -174,7 +190,7 @@ function outputRowToTable (table, outputRow, outputData, configData, mappingConf
 */
 
 // read in mapping configuration object
-var config = JSON.parse(fs.readFileSync('..\\config\\config.json', 'utf8'));
+var config = JSON.parse(fs.readFileSync('..\\config\\' + projectFolderName '\\config.json', 'utf8'));
 
 // read in all data
 fsOps.getMappingInputFiles(config).then(function (configData) {

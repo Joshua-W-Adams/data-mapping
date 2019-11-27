@@ -1,0 +1,61 @@
+{
+  "inputFile": "..\\config\\montara_fpso_2011_baseline\\map\\input.csv",
+  "oneToOneColumnMappings": "..\\config\\montara_fpso_2011_baseline\\map\\oneToOneColumnMappings.csv",
+  "oneToManyColumnMappings": "..\\config\\montara_fpso_2011_baseline\\map\\oneToManyColumnMappings.csv",
+  "oneToFewColumnMappings": "..\\config\\montara_fpso_2011_baseline\\map\\oneToFewColumnMappings.csv",
+  "tableFilters": "..\\config\\montara_fpso_2011_baseline\\map\\tableFilters.csv",
+  "tableList": "..\\config\\montara_fpso_2011_baseline\\map\\tables.csv",
+  "lookups": [{
+      "name": "loopIdLookup",
+      "filePath": "..\\config\\montara_fpso_2011_baseline\\map\\loopIdLookup.csv"
+    },
+    {
+      "name": "inspectionIdLookup",
+      "filePath": "..\\config\\montara_fpso_2011_baseline\\map\\inspectionIdLookup.csv"
+    },
+    {
+      "name": "asmeb3610mLookup",
+      "filePath": "..\\config\\montara_fpso_2011_baseline\\map\\asmeb3610mLookup.csv"
+    }],
+  "tables": [{
+      "name": "loops",
+      "filePath": "..\\config\\montara_fpso_2011_baseline\\map\\loops.json"
+    },
+    {
+      "name": "equipment",
+      "filePath": "..\\config\\montara_fpso_2011_baseline\\map\\equipment.json"
+    },
+    {
+      "name": "damage_mechanism",
+      "filePath": "..\\config\\montara_fpso_2011_baseline\\map\\damage_mechanism.json"
+    },
+    {
+      "name": "strategy",
+      "filePath": "..\\config\\montara_fpso_2011_baseline\\map\\strategy.json"
+    },
+    {
+      "name": "cml",
+      "filePath": "..\\config\\montara_fpso_2011_baseline\\map\\cml.json"
+    },
+    {
+      "name": "inspection",
+      "filePath": "..\\config\\montara_fpso_2011_baseline\\map\\inspection.json"
+    },
+    {
+      "name": "grid",
+      "filePath": "..\\config\\montara_fpso_2011_baseline\\map\\grid.json"
+    }],
+  "test": {
+    "copyFilePath": "..\\config\\montara_fpso_2011_baseline\\test\\copy-data.sql",
+    "loadFilePath": "..\\config\\montara_fpso_2011_baseline\\test\\load-data.sql",
+    "cloneFilePath": "..\\config\\montara_fpso_2011_baseline\\test\\schema-integrity.sql"
+    },
+  "output": {
+    "dataFilepath": "..\\output\\data\\",
+    "debugFilepath": "..\\output\\debug\\"
+  },
+  "dbConnection": {
+    "executablePath": "C:\\solidintegrity\\bin\\mysql-5.7.19-winx64\\bin\\",
+    "cnfPath": "C:\\solidintegrity\\bin\\mysql-5.7.19-winx64\\"
+  }
+}
