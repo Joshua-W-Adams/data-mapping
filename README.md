@@ -69,7 +69,7 @@ npm install
 6. Execute mapping procedure
 
 ```
-.\src\> node main.js
+.\src\> node main.js <insert_project_folder_here>
 ```
 
 7. Check output files
@@ -92,7 +92,7 @@ npm install
     5. Execute test load
 
     ```
-    .\test\> node test.js
+    .\test\> node test.js <insert_project_folder_here>
     ```
 
     6. Review outputs for load errors
