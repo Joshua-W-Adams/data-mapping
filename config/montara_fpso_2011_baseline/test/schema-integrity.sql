@@ -301,7 +301,7 @@ CREATE TABLE ACTIONS
 	`CML_ID`                         VARCHAR(20),
 	`CML_TYPE`                       VARCHAR(160),
 	`AREA`                           VARCHAR(50),
-	`RESPONSIBLE_SYSTEM`             VARCHAR(30),
+	`RESPONSIBLE_SYSTEM`             VARCHAR(100),
 	`SAFETY_CRITICAL`                ENUM('YES','NO'),
 	`RESPONSIBLE`                    VARCHAR(50),
 
@@ -349,7 +349,7 @@ CREATE TABLE LOOPS
 	`RBI_SUMMARY`                                  TEXT,
 	`ERROR_CODE`                                   VARCHAR(5),
 	`COLOUR_CODE`                                  VARCHAR(10),
-	`RESPONSIBLE_SYSTEM`                           VARCHAR(30),
+	`RESPONSIBLE_SYSTEM`                           VARCHAR(100),
 	`INSPECTION_STRATEGY`                          ENUM('HALF LIFE','RBI','STATUTORY') DEFAULT NULL,
 	`RISK_MATRIX`                                  VARCHAR(5),
 
@@ -413,7 +413,7 @@ CREATE TABLE EQUIPMENT
 	`SHUTDOWN_REQUIREMENT`                         VARCHAR(30),
 	`ERROR_CODE`                                   VARCHAR(5),
 	`COLOUR_CODE`                                  VARCHAR(10),
-	`RESPONSIBLE_SYSTEM`                           VARCHAR(30),
+	`RESPONSIBLE_SYSTEM`                           VARCHAR(100),
 
 	-- PIPING SPECIFIC FIELDS
 	`EQUIP_FROM`                                   VARCHAR(50),
@@ -489,7 +489,7 @@ CREATE TABLE DAMAGE_MECHANISM
 	`STRATEGY_NOTES`                  TEXT,
 	`ERROR_CODE`                      VARCHAR(5),
 	`COLOUR_CODE`                     VARCHAR(10),
-	`RESPONSIBLE_SYSTEM`              VARCHAR(30),
+	`RESPONSIBLE_SYSTEM`              VARCHAR(100),
 
 	/*PRIMARY AND FOREIGN KEY DEFINITIONS*/
 	PRIMARY KEY (FACILITY_ID, LOOP_ID, DAMAGE_MECHANISM_ID),
@@ -525,7 +525,7 @@ CREATE TABLE STRATEGY
 	`LAST_INSPECTION_REPORT_NO`                                 VARCHAR(50),
 	`ERROR_CODE`                                                VARCHAR(5),
 	`COLOUR_CODE`                                               VARCHAR(10),
-	`RESPONSIBLE_SYSTEM`                                        VARCHAR(30),
+	`RESPONSIBLE_SYSTEM`                                        VARCHAR(100),
 
 	/*PRIMARY AND FOREIGN KEY DEFINITIONS*/
 	PRIMARY KEY (FACILITY_ID, STRATEGY_ID, LOOP_ID),
@@ -571,7 +571,7 @@ CREATE TABLE CML
 	`CLOSEST_MATCH`                                      VARCHAR(100),
 	`ERROR_CODE`                                         VARCHAR(5),
 	`COLOUR_CODE`                                        VARCHAR(10),
-	`RESPONSIBLE_SYSTEM`                                 VARCHAR(30),
+	`RESPONSIBLE_SYSTEM`                                 VARCHAR(100),
 
 	-- SPECIFIC FIELDS FOR WALL LOSS ASSESSMENTS
 	`ND_MM`                                              FLOAT,
@@ -677,7 +677,7 @@ CREATE TABLE INSPECTION
 	`CLOSEST_MATCH`                                    VARCHAR(100),
 	`ERROR_CODE`                                       VARCHAR(5),
 	`COLOUR_CODE`                                      VARCHAR(10),
-	`RESPONSIBLE_SYSTEM`                               VARCHAR(30),
+	`RESPONSIBLE_SYSTEM`                               VARCHAR(100),
 
 	-- SPECIFIC FIELDS FOR INSPECTION_WALL_LOSS TABLE
 	`NOMINAL_WALL_THICKNESS_MM`                        FLOAT,

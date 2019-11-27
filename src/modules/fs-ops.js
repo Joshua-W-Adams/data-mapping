@@ -270,6 +270,24 @@ function writeDataToFiles (configData, outputData) {
 
 }
 
+function createOutputFolders (configData) {
+
+  var filePath, key, o = configData.output;
+
+  for (key in o) {
+    if (o.hasOwnProperty(key)) {
+      filePath = o[key]
+      if (!fs.existsSync(filePath)) {
+        fs.mkdirSync(filePath, {recursive: true});
+      }
+    }
+  }
+
+  return ;
+
+}
+
 // Return all objects to calling javascript
 exports.getMappingInputFiles = getMappingInputFiles;
 exports.writeDataToFiles = writeDataToFiles;
+exports.createOutputFolders = createOutputFolders;

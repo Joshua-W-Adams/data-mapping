@@ -135,6 +135,7 @@ function mapData (configData) {
 
     }).on('end', function (err, data) {
 
+      fsOps.createOutputFolders(configData);
       fsOps.writeDataToFiles(configData, outputData);
       console.log('processing finished');
 
@@ -190,7 +191,7 @@ function outputRowToTable (table, outputRow, outputData, configData, mappingConf
 */
 
 // read in mapping configuration object
-var config = JSON.parse(fs.readFileSync('..\\config\\' + projectFolderName '\\config.json', 'utf8'));
+var config = JSON.parse(fs.readFileSync('..\\config\\' + projectFolderName + '\\config.json', 'utf8'));
 
 // read in all data
 fsOps.getMappingInputFiles(config).then(function (configData) {
