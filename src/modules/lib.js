@@ -145,7 +145,7 @@ function getOneToFewFilters (primaryKeyList, outputRow) {
 
 function addFilter (arr, column, value) {
 
-  if (column && value) {
+  if (column && (value || value === 0)) {
     arr.push({
       'column': column,
       'value': value
