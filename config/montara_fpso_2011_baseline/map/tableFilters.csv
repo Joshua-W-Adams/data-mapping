@@ -1,2 +1,9 @@
 Table,Filter_Type,Filter_Column,Filter_Value
+loops,NOT_EQUAL,Comments,Line is demolished
+equipment,NOT_EQUAL,Comments,Line is demolished
+damage_mechanism,NOT_EQUAL,Comments,Line is demolished
+strategy,NOT_EQUAL,Comments,Line is demolished
+cml,NOT_EQUAL,Comments,Line is demolished
+inspection,NOT_EQUAL,Comments,Line is demolished
 grid,EQUAL,Scan Type (Area / Radial / Point),Radial
+grid,NOT_EQUAL,Comments,Line is demolished
