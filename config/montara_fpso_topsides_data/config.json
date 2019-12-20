@@ -1,0 +1,61 @@
+{
+  "inputFile": "..\\config\\montara_fpso_topsides_data\\map\\input.csv",
+  "oneToOneColumnMappings": "..\\config\\montara_fpso_topsides_data\\map\\oneToOneColumnMappings.csv",
+  "oneToManyColumnMappings": "..\\config\\montara_fpso_topsides_data\\map\\oneToManyColumnMappings.csv",
+  "oneToFewColumnMappings": "..\\config\\montara_fpso_topsides_data\\map\\oneToFewColumnMappings.csv",
+  "tableFilters": "..\\config\\montara_fpso_topsides_data\\map\\tableFilters.csv",
+  "tableList": "..\\config\\montara_fpso_topsides_data\\map\\tables.csv",
+  "lookups": [{
+      "name": "loopIdLookup",
+      "filePath": "..\\config\\montara_fpso_topsides_data\\map\\loopIdLookup.csv"
+    },
+    {
+      "name": "inspectionIdLookup",
+      "filePath": "..\\config\\montara_fpso_topsides_data\\map\\inspectionIdLookup.csv"
+    },
+    {
+      "name": "asmeb3610mLookup",
+      "filePath": "..\\config\\montara_fpso_topsides_data\\map\\asmeb3610mLookup.csv"
+    }],
+  "tables": [{
+      "name": "loops",
+      "filePath": "..\\config\\montara_fpso_topsides_data\\map\\loops.json"
+    },
+    {
+      "name": "equipment",
+      "filePath": "..\\config\\montara_fpso_topsides_data\\map\\equipment.json"
+    },
+    {
+      "name": "damage_mechanism",
+      "filePath": "..\\config\\montara_fpso_topsides_data\\map\\damage_mechanism.json"
+    },
+    {
+      "name": "strategy",
+      "filePath": "..\\config\\montara_fpso_topsides_data\\map\\strategy.json"
+    },
+    {
+      "name": "cml",
+      "filePath": "..\\config\\montara_fpso_topsides_data\\map\\cml.json"
+    },
+    {
+      "name": "inspection",
+      "filePath": "..\\config\\montara_fpso_topsides_data\\map\\inspection.json"
+    },
+    {
+      "name": "grid",
+      "filePath": "..\\config\\montara_fpso_topsides_data\\map\\grid.json"
+    }],
+  "test": {
+    "copyFilePath": "..\\config\\montara_fpso_topsides_data\\test\\copy-data.sql",
+    "loadFilePath": "..\\config\\montara_fpso_topsides_data\\test\\load-data.sql",
+    "cloneFilePath": "..\\config\\montara_fpso_topsides_data\\test\\schema-integrity.sql"
+    },
+  "output": {
+    "dataFilepath": "..\\output\\montara_fpso_topsides_data\\map\\",
+    "debugFilepath": "..\\output\\montara_fpso_topsides_data\\test\\"
+  },
+  "dbConnection": {
+    "executablePath": "C:\\solidintegrity\\bin\\mysql-5.7.19-winx64\\bin\\",
+    "cnfPath": "C:\\solidintegrity\\bin\\mysql-5.7.19-winx64\\"
+  }
+}
