@@ -170,10 +170,13 @@ function formatAusDate(date) {
       day = parts[0],
       year = parts[2];
 
-  if (month.length < 2) month = '0' + month;
-  if (day.length < 2) day = '0' + day;
+  if (date !== "\\N") {
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    date = [year, month, day].join('-') + '\\t';
+  }
 
-  return [year, month, day].join('-') + '\\t';
+  return date;
 
 }
 
