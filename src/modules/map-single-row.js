@@ -286,7 +286,7 @@ function handleIfElse (columnMapping, columnValue, row) {
       return handleIfElseType(mElseType, mElse, row);
     }
   } else if (mConditionType === 'NOT NULL') {
-    if (columnValue !== '\\N') {
+    if (columnValue !== '\\N' || columnValue !== "") {
       return handleIfElseType(mIfType, mIf, row);
     } else {
       return handleIfElseType(mElseType, mElse, row);
