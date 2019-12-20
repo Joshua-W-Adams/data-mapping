@@ -1,0 +1,65 @@
+{
+  "inputFile": "..\\config\\montara_fpso_marine_data\\map\\input.csv",
+  "oneToOneColumnMappings": "..\\config\\montara_fpso_marine_data\\map\\oneToOneColumnMappings.csv",
+  "oneToManyColumnMappings": "..\\config\\montara_fpso_marine_data\\map\\oneToManyColumnMappings.csv",
+  "oneToFewColumnMappings": "..\\config\\montara_fpso_marine_data\\map\\oneToFewColumnMappings.csv",
+  "tableFilters": "..\\config\\montara_fpso_marine_data\\map\\tableFilters.csv",
+  "tableList": "..\\config\\montara_fpso_marine_data\\map\\tables.csv",
+  "lookups": [{
+      "name": "loopIdLookup",
+      "filePath": "..\\config\\montara_fpso_marine_data\\map\\loopIdLookup.csv"
+    },
+    {
+      "name": "inspectionIdLookup",
+      "filePath": "..\\config\\montara_fpso_marine_data\\map\\inspectionIdLookup.csv"
+    },
+    {
+      "name": "asmeb3610mLookup",
+      "filePath": "..\\config\\montara_fpso_marine_data\\map\\asmeb3610mLookup.csv"
+    },
+    {
+      "name": "asmeb3610mNominalWallThicknessLookup",
+      "filePath": "..\\config\\montara_fpso_marine_data\\map\\asmeb3610mNominalWallThicknessLookup.csv"
+    }],
+  "tables": [{
+      "name": "loops",
+      "filePath": "..\\config\\montara_fpso_marine_data\\map\\loops.json"
+    },
+    {
+      "name": "equipment",
+      "filePath": "..\\config\\montara_fpso_marine_data\\map\\equipment.json"
+    },
+    {
+      "name": "damage_mechanism",
+      "filePath": "..\\config\\montara_fpso_marine_data\\map\\damage_mechanism.json"
+    },
+    {
+      "name": "strategy",
+      "filePath": "..\\config\\montara_fpso_marine_data\\map\\strategy.json"
+    },
+    {
+      "name": "cml",
+      "filePath": "..\\config\\montara_fpso_marine_data\\map\\cml.json"
+    },
+    {
+      "name": "inspection",
+      "filePath": "..\\config\\montara_fpso_marine_data\\map\\inspection.json"
+    },
+    {
+      "name": "grid",
+      "filePath": "..\\config\\montara_fpso_marine_data\\map\\grid.json"
+    }],
+  "test": {
+    "copyFilePath": "..\\config\\montara_fpso_marine_data\\test\\copy-data.sql",
+    "loadFilePath": "..\\config\\montara_fpso_marine_data\\test\\load-data.sql",
+    "cloneFilePath": "..\\config\\montara_fpso_marine_data\\test\\schema-integrity.sql"
+    },
+  "output": {
+    "dataFilepath": "..\\output\\montara_fpso_marine_data\\map\\",
+    "debugFilepath": "..\\output\\montara_fpso_marine_data\\test\\"
+  },
+  "dbConnection": {
+    "executablePath": "C:\\solidintegrity\\bin\\mysql-5.7.19-winx64\\bin\\",
+    "cnfPath": "C:\\solidintegrity\\bin\\mysql-5.7.19-winx64\\"
+  }
+}
