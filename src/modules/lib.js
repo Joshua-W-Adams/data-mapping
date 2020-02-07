@@ -217,7 +217,7 @@ function handleDuplicates (outputRow, compareArr, compareArrName, duplicateUnres
       // columns that we are actually adding data too are the same as that in the database.
       if (value === '\\N') {
         value = null;
-      } else if (value.slice(-2) === '\\t') {
+      } else if (compareArrName = 'db' && typeof value === 'string' && value.slice(-2) === '\\t') {
         value = value.slice(0, value.length - 2);
       }
       filters = addFilter(filters, key, value);
@@ -233,7 +233,6 @@ function handleDuplicates (outputRow, compareArr, compareArrName, duplicateUnres
     duplicatesResolved.push(outputRow);
   } else {
     // not found - add value to duplicates list for manual assessment
-    outputRow['DUPLICATE_LOCATION'] = compareArrName;
     combineJsonObjects(outputRow, compareArr[0]);
     duplicateUnresolved.push(outputRow);
   }
