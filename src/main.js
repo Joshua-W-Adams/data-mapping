@@ -167,7 +167,7 @@ function outputRowToTable (table, outputRow, outputData, configData, mappingConf
   if (outputDataCheck.length > 0) {
     // confirm if dulicate requires manual review or can be ignored
     // and push to appropriate array
-    lib.handleDuplicates(outputRow, outputDataCheck, outputData[table + '_duplicates'], outputData[table + '_duplicates_resolved']);
+    lib.handleDuplicates(outputRow, outputDataCheck, 'input', outputData[table + '_duplicates'], outputData[table + '_duplicates_resolved']);
   } else {
     // check for data existing in database already
     dbDataCheck = lib.filterArray(configData[table], filters);
@@ -175,7 +175,7 @@ function outputRowToTable (table, outputRow, outputData, configData, mappingConf
     if (dbDataCheck.length > 0) {
       // confirm if dulicate requires manual review or can be ignored
       // and push to appropriate array
-      lib.handleDuplicates(outputRow, dbDataCheck, outputData[table + '_duplicates'], outputData[table + '_duplicates_resolved']);
+      lib.handleDuplicates(outputRow, dbDataCheck, 'db', outputData[table + '_duplicates'], outputData[table + '_duplicates_resolved']);
     // case 3 - data not found in output data or database
     } else {
       // push output row to array

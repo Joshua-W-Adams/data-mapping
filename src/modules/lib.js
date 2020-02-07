@@ -202,7 +202,7 @@ function combineJsonObjects (outputRow, duplicateRow) {
   return;
 }
 
-function handleDuplicates (outputRow, compareArr, duplicateUnresolved, duplicatesResolved) {
+function handleDuplicates (outputRow, compareArr, compareArrName, duplicateUnresolved, duplicatesResolved) {
 
   var filters = [],
       value,
@@ -233,6 +233,7 @@ function handleDuplicates (outputRow, compareArr, duplicateUnresolved, duplicate
     duplicatesResolved.push(outputRow);
   } else {
     // not found - add value to duplicates list for manual assessment
+    outputRow['DUPLICATE_LOCATION'] = compareArrName;
     combineJsonObjects(outputRow, compareArr[0]);
     duplicateUnresolved.push(outputRow);
   }
