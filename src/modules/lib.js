@@ -217,7 +217,7 @@ function handleDuplicates (outputRow, compareArr, compareArrName, duplicateUnres
       // columns that we are actually adding data too are the same as that in the database.
       if (value === '\\N') {
         value = null;
-      } else if (compareArrName = 'db' && typeof value === 'string' && value.slice(-2) === '\\t') {
+      } else if (compareArrName === 'db' && typeof value === 'string' && value.slice(-2) === '\\t') {
         value = value.slice(0, value.length - 2);
       }
       filters = addFilter(filters, key, value);
