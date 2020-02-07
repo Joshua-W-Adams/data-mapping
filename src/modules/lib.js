@@ -217,6 +217,8 @@ function handleDuplicates (outputRow, compareArr, duplicateUnresolved, duplicate
       // columns that we are actually adding data too are the same as that in the database.
       if (value === '\\N') {
         value = null;
+      } else if (value.slice(-2) === '\\t') {
+        value = value.slice(0, value.length - 2);
       }
       filters = addFilter(filters, key, value);
     }
