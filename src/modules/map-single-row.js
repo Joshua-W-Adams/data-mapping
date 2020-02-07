@@ -57,6 +57,8 @@ function getOutputColumnValue (row, columnMapping, configData, outputData, table
     cValue = mValue;
   } else if (cType === 'COLUMN_DATE') {
     cValue = formatAusDate(mValue);
+  } else if (cType === 'COLUMN_EXCEL_TIMESTAMP') {
+    cValue = handleExcelTimestamp(mValue);
   } else if (cType === 'IF_ELSE') {
     cValue = handleIfElse (columnMapping, mValue, row);
   } else if (cType === 'CONCAT') {
@@ -180,6 +182,34 @@ function formatAusDate(date) {
 
 }
 
+
+/**
+ * excelToUnixTimestamp
+ * Excel stores dates internally as number of days since January 1, 1900.
+ * For example: "June 9th, 2011 10:30 AM" would be stored as "40703.4375".
+ * 40703 is the number of full days since 01/01/1900 and 0.4375 represents the time (10.5/24 = 0.4375).
+ */
+function excelToUnixTimestamp(excelStamp) {
+  // 25569 = 01/01/1970
+  let unixStamp = (parseFloat(excelStamp) - 25569) * 86400
+  return unixStamp;
+}
+
+function handleExcelTimestamp(excelStamp) {
+  let unixStamp = excelToUnixTimestamp(excelStamp);
+  // Create a new JavaScript Date object based on the timestamp
+  // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+  let date = new Date(unixStamp * 1000);
+  // Year part
+  let year = date.getFullYear();
+  // Month (0 - 11) + 1
+  let month = date.getMonth() + 1;
+  // Day of month
+  let day = date.getDate();
+  // Will display time in 10:30:23 format
+  return [year, month, day].join('-') + '\\t';
+}
+
 function handleIfElseType (type, ifElseValue, row) {
 
   if (type === 'VALUE') {
@@ -297,6 +327,5 @@ function handleIfElse (columnMapping, columnValue, row) {
   }
 
 }
-
 
 exports.mapOneInputRowToOneOutputRow = mapOneInputRowToOneOutputRow;
