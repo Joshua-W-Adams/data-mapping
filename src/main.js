@@ -140,6 +140,7 @@ function mapData (configData) {
     }).on('end', function (err, data) {
 
       fsOps.createOutputFolders(configData);
+      getSummaryTable(tableList, outputData);
       fsOps.writeDataToFiles(configData, outputData);
       console.log('processing finished');
 
@@ -148,6 +149,25 @@ function mapData (configData) {
       throw err.message;
     })
 
+}
+
+function getSummaryTable(tableList, outputData) {
+  // create property to store data
+  outputData.summary = [];
+  // loop through all tables and create summary
+  for (let i = 0; i < tableList.length; i++) {
+    let table = tableList[i].Table;
+    let add = outputData[table].length;
+    let dups_res = outputData[table + '_duplicates_resolved'].length;
+    let dups_unres = outputData[table + '_duplicates'].length;
+    outputData.summary.push({
+      'table_name': table,
+      'add': add,
+      'dups_res': dups_res,
+      'dups_unres': dups_unres,
+      'total': add + dups_res + dups_unres
+    });
+  }
 }
 
 function getNewInputDuplicateNumber(value, primaryKeys) {
