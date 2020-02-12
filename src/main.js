@@ -47,7 +47,10 @@ function mapData (configData) {
       mappingConfigurations = {},
       // counter to indicate how far application is through processing in the
       // command console.
-      count = 0;
+      count = 0,
+      // store an index of all primary keys where a duplicate record that requires
+      // renumbering is encountered
+      inputDuplicatesCount = {};
 
   // get mapping configuration data for each table to be created
   mappingConfigurations = lib.getTableMappingConfigurations(configData);
@@ -101,7 +104,7 @@ function mapData (configData) {
                 , row, mappingConfigurations[table].oneToOneMappingList, true
                 , oneToManySpecificArr, configData);
               // push row to storing array
-              outputRowToTable(table, outputRow, outputData, configData, mappingConfigurations);
+              outputRowToTable(table, row, outputRow, outputData, configData, mappingConfigurations, inputDuplicatesCount);
             }
 
           // one to few mapping case detected
@@ -112,7 +115,7 @@ function mapData (configData) {
               , row, mappingConfigurations[table].oneToFewMappingList, false
               , null, configData);
             // push row to storing array
-            outputRowToTable(table, outputRow, outputData, configData, mappingConfigurations);
+            outputRowToTable(table, row, outputRow, outputData, configData, mappingConfigurations, inputDuplicatesCount);
 
           // one to single mapping detected
           } else {
@@ -122,7 +125,7 @@ function mapData (configData) {
               , row, mappingConfigurations[table].oneToOneMappingList, false
               , null, configData);
             // push row to array
-            outputRowToTable(table, outputRow, outputData, configData, mappingConfigurations);
+            outputRowToTable(table, row, outputRow, outputData, configData, mappingConfigurations, inputDuplicatesCount);
 
           }
 
@@ -131,7 +134,8 @@ function mapData (configData) {
       }
 
       // log current status of mapping operation, i.e. input row number
-      console.log(count++);
+      count++
+      console.log(count);
 
     }).on('end', function (err, data) {
 
@@ -146,6 +150,63 @@ function mapData (configData) {
 
 }
 
+function getNewInputDuplicateNumber(value, primaryKeys) {
+  let pk;
+  // create primary key index
+  for (let i = 0; i < primaryKeys.length; i++) {
+    pk = pk + primaryKeys[i].value;
+  }
+  // determine if primary key has been renumbered before
+  let count = inputDuplicatesCount[pk];
+  // renumbered previously
+  if (count) {
+    count++
+    inputDuplicatesCount[pk] = count;
+  // not encountered before
+  } else {
+    count = 1;
+    inputDuplicatesCount[pk] = count;
+  }
+  return [value, count].join('.') + '\\t';
+}
+
+function renumber(inputRow, outputRow, primaryKeys, inputDuplicatesCount, renumberArr) {
+  let keyToUpdateOutput = renumberArr[0].Renumber_Output_Field;
+  let keyToUpdateInput = renumberArr[0].Renumber_Input_Field;
+  let commentField = renumberArr[0].Renumber_Comment_Field;
+  let commentValue = renumberArr[0].Renumber_Comment;
+  // determine new number
+  let newNumber = getNewInputDuplicateNumber(outputRow[keyToUpdateOutput], primaryKeys, inputDuplicatesCount);
+  // update row comments
+  if (outputRow[commentField] === '\\N') {
+    outputRow.CML_COMMENTS = '';
+  }
+  outputRow[commentField] = outputRow[keyToUpdateOutput] + ' renumbered to ' + newNumber + '. ' + commentValue + ';' + outputRow[commentField];
+  // update row number
+  outputRow[keyToUpdateOutput] = newNumber;
+  // update input row number to unsure new number is propogated through table children
+  inputRow[keyToUpdateInput] = newNumber;
+}
+
+function outputRowToDuplicateTable(ignore, outputRow, duplicatesResolved, duplicateUnresolved, compareArr) {
+  // duplicate found
+  if (ignore) {
+    // do nothing and skip value
+    duplicatesResolved.push(outputRow);
+  } else {
+    // not found - add value to duplicates list for manual assessment
+    lib.combineJsonObjects(outputRow, compareArr[0]);
+    duplicateUnresolved.push(outputRow);
+  }
+}
+
+function getRowRenumberDetails(table, mappingConfigurations) {
+  let arr = mappingConfigurations[table].modifierList.filter(function (row) {
+    return row.Modifier === 'renumber_input_duplicates';
+  })
+  return arr;
+}
+
 /**
  * outputRow - output a row of generated data. Data will be output to one of 3
  * files per table based on 3 conditions.
@@ -155,7 +216,10 @@ function mapData (configData) {
  *
  * @return {type}  description
  */
-function outputRowToTable (table, outputRow, outputData, configData, mappingConfigurations) {
+function outputRowToTable (table, row, outputRow, outputData, configData, mappingConfigurations, inputDuplicatesCount) {
+  // variable for determining if a duplicate output row should be ignored or
+  // manually reviewed
+  let ignore = false;
   // commence check for output row already existing in output data
   // or master database
   // generate filter list for two duplicate check locations
@@ -167,7 +231,19 @@ function outputRowToTable (table, outputRow, outputData, configData, mappingConf
   if (outputDataCheck.length > 0) {
     // confirm if dulicate requires manual review or can be ignored
     // and push to appropriate array
-    lib.handleDuplicates(outputRow, outputDataCheck, 'input', outputData[table + '_duplicates'], outputData[table + '_duplicates_resolved']);
+    ignore = lib.handleDuplicates(outputRow, outputDataCheck, 'input');
+    // get table renumbering details
+    let renumberArr = getRowRenumberDetails(table, mappingConfigurations);
+    // if applicable renumber row as per details
+    if (renumberArr.length && !ignore) {
+      // renumber input and output rows
+      renumber(row, outputRow, primaryKeys, inputDuplicatesCount, renumberArr);
+      // push output row to array
+      outputData[table].push(outputRow);
+    // handle duplicate as per usual
+    } else {
+      outputRowToDuplicateTable(ignore, outputRow, outputData[table + '_duplicates'], outputData[table + '_duplicates_resolved'], outputDataCheck);
+    }
   } else {
     // check for data existing in database already
     dbDataCheck = lib.filterArray(configData[table], filters);
@@ -175,7 +251,8 @@ function outputRowToTable (table, outputRow, outputData, configData, mappingConf
     if (dbDataCheck.length > 0) {
       // confirm if dulicate requires manual review or can be ignored
       // and push to appropriate array
-      lib.handleDuplicates(outputRow, dbDataCheck, 'db', outputData[table + '_duplicates'], outputData[table + '_duplicates_resolved']);
+      ignore = lib.handleDuplicates(outputRow, dbDataCheck, 'db');
+      outputRowToDuplicateTable(ignore, outputRow, outputData[table + '_duplicates'], outputData[table + '_duplicates_resolved'], dbDataCheck);
     // case 3 - data not found in output data or database
     } else {
       // push output row to array

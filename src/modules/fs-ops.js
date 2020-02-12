@@ -66,6 +66,7 @@ function getMappingInputFiles (config) {
     oneToFewColumnMappings: [],
     tableFilters: [],
     tableList: [],
+    tableModifiers: [],
     output: config.output
   };
 
@@ -74,7 +75,8 @@ function getMappingInputFiles (config) {
       p2 = fileToJson(config.oneToManyColumnMappings, inputData.oneToManyColumnMappings),
       p3 = fileToJson(config.oneToFewColumnMappings, inputData.oneToFewColumnMappings),
       p4 = fileToJson(config.tableFilters, inputData.tableFilters),
-      p5 = fileToJson(config.tableList, inputData.tableList);
+      p5 = fileToJson(config.tableList, inputData.tableList),
+      p6 = fileToJson(config.tableModifiers, inputData.tableModifiers);
 
   // push promises to array
   promiseArray.push(p1);
@@ -82,6 +84,7 @@ function getMappingInputFiles (config) {
   promiseArray.push(p3);
   promiseArray.push(p4);
   promiseArray.push(p5);
+  promiseArray.push(p6);
 
   // append all lookup files to promise array
   for (var x = 0; x < config.lookups.length; x++) {

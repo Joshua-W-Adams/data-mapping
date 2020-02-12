@@ -5,6 +5,7 @@
   "oneToFewColumnMappings": "..\\config\\montara_fpso_marine_data\\map\\oneToFewColumnMappings.csv",
   "tableFilters": "..\\config\\montara_fpso_marine_data\\map\\tableFilters.csv",
   "tableList": "..\\config\\montara_fpso_marine_data\\map\\tables.csv",
+  "tableModifiers": "..\\config\\montara_fpso_marine_data\\map\\table_modifiers.csv",
   "lookups": [{
       "name": "loopIdLookup",
       "filePath": "..\\config\\montara_fpso_marine_data\\map\\loopIdLookup.csv"

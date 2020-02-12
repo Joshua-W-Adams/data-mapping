@@ -35,7 +35,8 @@ function getTableMappingConfigurations (configData) {
       pkArr,
       tableFiltersArr,
       maxRecordArr,
-      oneToManyCount = 0;
+      oneToManyCount = 0,
+      modifiersArr;
 
   function filterCallback (i, n) {
     return i.Table===table;
@@ -70,6 +71,7 @@ function getTableMappingConfigurations (configData) {
     oneToFewArr = configData.oneToFewColumnMappings.filter(filterCallback);
     tableFiltersArr = configData.tableFilters.filter(filterCallback);
     pkArr = getPrimaryKeys();
+    modifiersArr = configData.tableModifiers.filter(filterCallback);
 
     // determine amount of times input record should be duplicated in one to
     // many mappings
@@ -85,7 +87,8 @@ function getTableMappingConfigurations (configData) {
       'oneToFewMappingList': oneToFewArr,
       'tableFiltersList': tableFiltersArr,
       'oneToManyCount': oneToManyCount,
-      'primaryKeyList': pkArr
+      'primaryKeyList': pkArr,
+      'modifierList': modifiersArr
     }
 
     // store oneToManyMappings for specific record
@@ -202,7 +205,7 @@ function combineJsonObjects (outputRow, duplicateRow) {
   return;
 }
 
-function handleDuplicates (outputRow, compareArr, compareArrName, duplicateUnresolved, duplicatesResolved) {
+function handleDuplicates (outputRow, compareArr, compareArrName) {
 
   var filters = [],
       value,
@@ -230,11 +233,10 @@ function handleDuplicates (outputRow, compareArr, compareArrName, duplicateUnres
   // duplicate found
   if (duplicates.length > 0) {
     // do nothing and skip value
-    duplicatesResolved.push(outputRow);
+    return true;
   } else {
     // not found - add value to duplicates list for manual assessment
-    combineJsonObjects(outputRow, compareArr[0]);
-    duplicateUnresolved.push(outputRow);
+    return false;
   }
 
 }
@@ -334,3 +336,4 @@ exports.addFilter = addFilter;
 exports.filterArray = filterArray;
 exports.includeRow = includeRow;
 exports.handleInput = handleInput;
+exports.combineJsonObjects = combineJsonObjects;
