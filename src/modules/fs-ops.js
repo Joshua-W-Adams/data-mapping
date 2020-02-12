@@ -171,6 +171,13 @@ function count(obj) {
   return Object.keys(obj).length;
 }
 
+function stripTabs(value) {
+  if (typeof value === 'string' && value.slice(-2) === '\\t') {
+    value = value.slice(0, value.length - 2);
+  }
+  return value;
+}
+
 function outputUnresolvedDuplicateData (workbook, data) {
   var x, y, row, key, colCount
       , sht = workbook.sheet("Sheet1");
@@ -200,9 +207,16 @@ function outputUnresolvedDuplicateData (workbook, data) {
         if (y >= colCount / 2) {
 
           var inputKey = key.substring(3,key.length);
-          if (row[key] !== row[inputKey] && row[inputKey] !== "\\N") {
+          let val1 = stripTabs(row[key]);
+          let val2 = stripTabs(row[inputKey]);
+
+          if (val1 !== val2 && row[inputKey] !== "\\N") {
             sht.row(x + 2).cell(y + 1).style("fill", "FF0000");
             sht.row(x + 2).cell(y + 1 - colCount / 2).style("fill", "FF0000");
+            // highlight column header so it is easier to identify columns
+            // conflicts are present on
+            sht.row(1).cell(y + 1).style("fill", "FF0000");
+            sht.row(1).cell(y + 1 - colCount / 2).style("fill", "FF0000");
           }
 
         }
