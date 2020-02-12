@@ -237,12 +237,12 @@ function outputRowToTable (table, row, outputRow, outputData, configData, mappin
     // if applicable renumber row as per details
     if (renumberArr.length && !ignore) {
       // renumber input and output rows
-      renumber(row, outputRow, primaryKeys, inputDuplicatesCount, renumberArr);
+      renumber(row, outputRow, filters, inputDuplicatesCount, renumberArr);
       // push output row to array
       outputData[table].push(outputRow);
     // handle duplicate as per usual
     } else {
-      outputRowToDuplicateTable(ignore, outputRow, outputData[table + '_duplicates'], outputData[table + '_duplicates_resolved'], outputDataCheck);
+      outputRowToDuplicateTable(ignore, outputRow, outputData[table + '_duplicates_resolved'], outputData[table + '_duplicates'], outputDataCheck);
     }
   } else {
     // check for data existing in database already
@@ -252,7 +252,7 @@ function outputRowToTable (table, row, outputRow, outputData, configData, mappin
       // confirm if dulicate requires manual review or can be ignored
       // and push to appropriate array
       ignore = lib.handleDuplicates(outputRow, dbDataCheck, 'db');
-      outputRowToDuplicateTable(ignore, outputRow, outputData[table + '_duplicates'], outputData[table + '_duplicates_resolved'], dbDataCheck);
+      outputRowToDuplicateTable(ignore, outputRow, outputData[table + '_duplicates_resolved'], outputData[table + '_duplicates'], dbDataCheck);
     // case 3 - data not found in output data or database
     } else {
       // push output row to array
