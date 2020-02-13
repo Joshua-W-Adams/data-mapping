@@ -25,3 +25,4 @@ INSERT INTO integrity_test.strategy (SELECT * FROM integrity.strategy);
 INSERT INTO integrity_test.cml (SELECT * FROM integrity.cml);
 INSERT INTO integrity_test.inspection (SELECT * FROM integrity.inspection);
 INSERT INTO integrity_test.grid (SELECT * FROM integrity.grid);
+INSERT INTO integrity_test.error_code_facility (SELECT * FROM integrity.error_code_facility);
